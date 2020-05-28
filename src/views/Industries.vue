@@ -11,72 +11,58 @@
         </div>
         <div class="row justify-content-center features">
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="fas fa-calendar-plus icon"></i>
-              <h3 class="name">事业单位(医疗、教育)专区</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                查看详情
-                <b-icon icon="chevron-double-right"></b-icon>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="事业单位(医疗、教育)专区"
+              description=""
+              navigatePath="http://www.ciep.gov.cn/"
+            >
+              <font-awesome-icon class="box-icon" icon="calendar-plus" />
+            </IconBox>
           </div>
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="fas fa-cogs icon"></i>
-              <h3 class="name">深圳市属国企专区</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                <span style="text-decoration: underline;">
-                  查看详情
-                  <b-icon icon="chevron-double-right"></b-icon>
-                </span>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="深圳市属国企专区"
+              description=""
+              navigatePath="/"
+            >
+              <font-awesome-icon class="box-icon" icon="cogs" />
+            </IconBox>
           </div>
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="fa fa-microchip icon"></i>
-              <h3 class="name">电子信息行业专区</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                查看详情
-                <b-icon icon="chevron-double-right"></b-icon>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="电子信息行业专区"
+              description=""
+              navigatePath="/"
+            >
+              <font-awesome-icon class="box-icon" icon="microchip" />
+            </IconBox>
           </div>
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="fas fa-robot icon"></i>
-              <h3 class="name">AI智能行业专区</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                查看详情
-                <b-icon icon="chevron-double-right"></b-icon>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="电子信息行业专区"
+              description=""
+              navigatePath="/"
+            >
+              <font-awesome-icon class="box-icon" icon="robot" />
+            </IconBox>
           </div>
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="fa fa-flask icon"></i>
-              <h3 class="name">新材料</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                查看详情
-                <b-icon icon="chevron-double-right"></b-icon>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="新材料"
+              description=""
+              navigatePath="/"
+            >
+              <font-awesome-icon class="box-icon" icon="flask" />
+            </IconBox>
           </div>
           <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <div class="box">
-              <i class="material-icons icon">business</i>
-              <h3 class="name">地产建筑</h3>
-              <p class="description"></p>
-              <a class="learn-more" href="companies.html">
-                查看详情
-                <b-icon icon="chevron-double-right"></b-icon>
-              </a>
-            </div>
+            <IconBox
+              boxTitle="地产建筑"
+              description=""
+              navigatePath="/"
+            >
+              <font-awesome-icon class="box-icon" icon="building" />
+            </IconBox>
           </div>
         </div>
       </div>
@@ -85,9 +71,20 @@
 </template>
 
 <script scoped>
-import '@/assets/css/Features-Boxed.css'
+import IconBox from '@/components/IconBox.vue'
 
 export default {
-  name: 'Industries'
+  name: 'Industries',
+  components: {
+    IconBox
+  }
 }
 </script>
+
+<style lang="sass">
+.box-icon
+  font-size: 60px;
+  color: #1485ee;
+  margin-top: 20px;
+  margin-bottom: 35px;
+</style>
