@@ -22,9 +22,9 @@
         </b-col>
         <b-col class="item" sm="12" md="6" lg="3">
           <IconBox
-            boxTitle="我要参展"
+            boxTitle="企业参展"
             description=""
-            navigatePath="/"
+            navigatePath="/regguide"
           >
             <b-icon class="guide-icon" icon="building"></b-icon>
           </IconBox>
