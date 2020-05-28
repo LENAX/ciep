@@ -24,7 +24,12 @@ export default new Router({
     {
       path: '/industries',
       name: 'industries',
-      component: () => import(/* webpackChunkName: "about" */ './views/Industries.vue'),
+      component: () => import(/* webpackChunkName: "about" */ './views/Industries.vue')
+    },
+    {
+      path: '/regguide',
+      name: 'regguide',
+      component: () => import(/* webpackChunkName: "about" */ './views/CompanyRegisterGuide.vue')
     }
     /*
     {
@@ -36,8 +41,7 @@ export default new Router({
     {
       path: '/register',
       name: 'register',
-      component: UserRegister,
-      props: (route) => ({ query: route.query.type})
+      component: UserRegister
     },
     {
       path: '/event',
@@ -48,14 +52,14 @@ export default new Router({
       }, {
         path: 'signup',
         component: EventSignup
-      }] 
+      }]
     },
     {
       path: '/live',
       name: 'live',
       component: LiveView
     },
-    
+
     {
       path: '/company/:id',
       name: 'company',
@@ -101,7 +105,7 @@ export default new Router({
     }
     */
   ],
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     }
