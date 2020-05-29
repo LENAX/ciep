@@ -30,6 +30,11 @@ export default new Router({
       path: '/regguide',
       name: 'regguide',
       component: () => import(/* webpackChunkName: "about" */ './views/CompanyRegisterGuide.vue')
+    },
+    {
+      path: '/industry/:industryId',
+      component: () => import(/* webpackChunkName: "about" */ './views/IndustrySection.vue'),
+      props: true
     }
     /*
     {

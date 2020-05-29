@@ -10,17 +10,17 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { 
-  faCalendarPlus, faCogs, faMicrochip,
-  faRobot, faFlask, faBuilding
+import {
+  faCogs, faMicrochip,
+  faRobot, faFlask, faBuilding, faMedkit
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCalendarPlus)
 library.add(faCogs)
 library.add(faMicrochip)
 library.add(faRobot)
 library.add(faFlask)
 library.add(faBuilding)
+library.add(faMedkit)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
