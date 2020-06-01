@@ -35,6 +35,11 @@ export default new Router({
       path: '/industry/:industryId',
       component: () => import(/* webpackChunkName: "about" */ './views/IndustrySection.vue'),
       props: true
+    },
+    {
+      path: '/company/:id',
+      name: 'company',
+      component: () => import(/* webpackChunkName: "about" */ './views/CompanyHomeView.vue')
     }
     /*
     {
@@ -65,19 +70,6 @@ export default new Router({
       component: LiveView
     },
 
-    {
-      path: '/company/:id',
-      name: 'company',
-      component: CompanyView,
-      children: [{
-        path: 'info',
-        component: CompanyInformation,
-      }, {
-        path: 'jobs',
-        component: JobList,
-        props: (route) => ({ query: route.query})
-      }]
-    },
     {
       path: '/job/:id',
       name: 'job',
