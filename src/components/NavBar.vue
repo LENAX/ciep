@@ -11,10 +11,10 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-nav-item href="http://www.ciep.gov.cn/" target="_blank">大会官网</b-nav-item>
-          <b-nav-item href="#">行业展区</b-nav-item>
+          <b-nav-item to="/industries">行业展区</b-nav-item>
           <b-nav-item-dropdown text="会展服务" right>
             <b-dropdown-item href="#">人才参会</b-dropdown-item>
-            <b-dropdown-item href="#">企业参会</b-dropdown-item>
+            <b-dropdown-item to="/regguide">企业参会</b-dropdown-item>
             <b-dropdown-item href="#">
               招聘直播间
             </b-dropdown-item>
