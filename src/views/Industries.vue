@@ -19,60 +19,6 @@
               <font-awesome-icon class="box-icon" :icon="industry.icon" />
             </IconBox>
           </b-col>
-          <!-- <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="事业单位(医疗、教育)专区"
-              description=""
-              navigatePath="/"
-            >
-              <font-awesome-icon class="box-icon" icon="medkit" />
-            </IconBox>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="深圳市属国企专区"
-              description=""
-              navigatePath="/"
-            >
-              <font-awesome-icon class="box-icon" icon="cogs" />
-            </IconBox>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="电子信息行业专区"
-              description=""
-              navigatePath="/"
-            >
-              <font-awesome-icon class="box-icon" icon="microchip" />
-            </IconBox>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="AI智能行业专区"
-              description=""
-              navigatePath="/"
-            >
-              <font-awesome-icon class="box-icon" icon="robot" />
-            </IconBox>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="新材料"
-              description=""
-              navigatePath="/"
-            >
-              <font-awesome-icon class="box-icon" icon="flask" />
-            </IconBox>
-          </div>
-          <div class="col-sm-6 col-md-5 col-lg-4 item">
-            <IconBox
-              boxTitle="地产建筑"
-              description=""
-              navigatePath="/industry"
-            >
-              <font-awesome-icon class="box-icon" icon="hardhat" />
-            </IconBox>
-          </div> -->
         </b-row>
       </b-container>
     </div>
