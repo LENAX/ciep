@@ -19,3 +19,16 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# asset files
+src/assets/fonts/*
+src/assets/img/*
+src/assets/bootstrap/*
+src/assets/css/*
+src/assets/js/*
+
+# configuration
+package-lock.json
+package.json
+.eslintrc.js
+vue.config.js

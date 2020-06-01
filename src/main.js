@@ -11,7 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
-  faCogs, faMicrochip,
+  faCogs, faMicrochip, faBriefcase,
   faRobot, faFlask, faBuilding, faMedkit
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -21,6 +21,7 @@ library.add(faRobot)
 library.add(faFlask)
 library.add(faBuilding)
 library.add(faMedkit)
+library.add(faBriefcase)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
