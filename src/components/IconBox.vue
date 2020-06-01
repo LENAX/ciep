@@ -35,4 +35,7 @@ export default {
 <style lang="sass" scoped>
 .learn-more
   font-family: Helvetica
+
+.box
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
 </style>
