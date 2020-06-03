@@ -5,7 +5,7 @@
         <b-col md="12" sm="12" class="nopadding">
           <div class="dashboard-header">
             <b-row>
-              <b-col md="8" sm="12" class="col-xs-12">
+              <b-col md="6" sm="12" class="col-xs-12">
                 <div class="dashboard-header-logo-box">
                   <slot name="headerImage"></slot>
                   <h5>{{ headerTitle }}</h5>
@@ -49,7 +49,6 @@ export default {
 .company-dashboard
   padding-bottom: 40px;
   text-align: center;
-  // background: rgba(60, 146, 202, 0.7) no-repeat fixed center center / cover;
   background: url('../assets/img/ciep_theme_bg.jpeg') no-repeat center center / cover;
 
 .dashboard-header-logo-box
