@@ -20,7 +20,7 @@
         </div>
       </b-col>
       <b-col md=3 sm=12 class="col-xs-12">
-        <a class="btn btn-info btn-lg text-light">投递简历</a>
+        <a class="btn btn-success btn-lg text-light">投递简历</a>
       </b-col >
     </b-row>
   </div>
