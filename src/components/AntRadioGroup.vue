@@ -1,26 +1,12 @@
 <template>
   <div class="ant-radio-group ant-radio-group-outline">
-    <AntRadio
-      :checked="radio.checked"
-      :name="radio.name"
-      :value="radio.value"
-      v-for="radio in radioInputs"
-      :key="radio.name"
-    />
+    <slot></slot>
   </div>
 </template>
 
 <script>
-import AntRadio from '@/components/AntRadio.vue'
-
 export default {
-  name: 'AntRadioGroup',
-  components: {
-    AntRadio
-  },
-  props: {
-    radioInputs: Array
-  }
+  name: 'AntRadioGroup'
 }
 </script>
 

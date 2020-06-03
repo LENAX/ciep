@@ -1,7 +1,7 @@
 <template>
-  <label :class="radioButtonWrapperClass">
-    <span :class="radioButtonClass">
-      <input type="radio" class="ant-radio-button-input" :value="value" :checked="checked ? true : false"/>
+  <label :class="radioButtonWrapperClass(isChecked)">
+    <span :class="radioButtonClass(isChecked)">
+      <input type="radio" class="ant-radio-button-input" :value="value" :checked="isChecked ? true : false"/>
       <span class="ant-radio-button-inner"></span>
     </span>
     <span>{{name}}</span>
@@ -12,11 +12,14 @@
 export default {
   name: 'AntRadio',
   props: {
-    checked: Boolean,
+    isChecked: Boolean,
     name: String,
     value: String
   },
-  computed: {
+  methods: {
+    handleClick () {
+      return !this.isChecked
+    },
     radioButtonWrapperClass: (checked) => {
       return checked ? 'ant-radio-button-wrapper ant-radio-button-wrapper-checked' : 'ant-radio-button-wrapper'
     },
