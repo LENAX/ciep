@@ -3,10 +3,17 @@
     <b-container class="pt-2 pb-2">
       <b-row class="mt-1 mb-2" offset="3">
         <b-col md-offset="1">
-          <b-button-group>
-            <b-button squared variant="primary">找职位</b-button>
-            <b-button squared variant="outline-secondary">找公司</b-button>
-          </b-button-group>
+          <b-form-group class="mb-0">
+            <b-form-radio-group
+              id="btn-radios-2"
+              v-model="selected"
+              :options="options"
+              buttons
+              button-variant="outline-primary"
+              size="md"
+              name="radio-btn-outline"
+            ></b-form-radio-group>
+          </b-form-group>
         </b-col>
       </b-row>
       <b-row>
@@ -24,12 +31,20 @@
 </template>
 
 <script>
+import AntRadio from '@/components/AntRadio.vue'
+import AntRadioGroup from '@/components/AntRadioGroup.vue'
+
 export default {
   name: 'SearchBar',
   data () {
     return {
       keywords: '',
-      search_type: ''
+      search_type: '',
+      selected: 'recruit',
+      options: [
+        { text: '找工作', value: 'recruit' },
+        { text: '找公司', value: 'company' },
+      ]
     }
   }
 }
