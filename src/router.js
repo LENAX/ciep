@@ -45,6 +45,11 @@ export default new Router({
       path: '/job/:id',
       name: 'job',
       component: () => import(/* webpackChunkName: "about" */ './views/JobView.vue')
+    },
+    {
+      path: '/live',
+      name: 'live',
+      component: () => import(/* webpackChunkName: "about" */ './views/LiveView.vue')
     }
     /*
     {
@@ -73,16 +78,6 @@ export default new Router({
       path: '/live',
       name: 'live',
       component: LiveView
-    },
-
-    {
-      path: '/job/:id',
-      name: 'job',
-      component: JobView,
-      children: [{
-        path: 'apply',
-        component: JobApplication
-      }]
     },
     {
       path: '/profile/:userid',
