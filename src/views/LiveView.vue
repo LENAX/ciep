@@ -84,4 +84,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.box-icon
+  font-size: 60px;
+  color: #1485ee;
+  margin-top: 20px;
+  margin-bottom: 35px;
 </style>
