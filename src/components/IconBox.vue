@@ -38,4 +38,11 @@ export default {
 
 .box
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+  cursor: pointer
+  -webkit-transition: all .2s cubic-bezier(.645,.045,.355,1)
+  transition: all .2s cubic-bezier(.645,.045,.355,1)
+
+.box:hover
+  -webkit-box-shadow: 0 6px 16px -8px rgba(0,0,0,.08), 0 9px 28px 0 rgba(0,0,0,.05), 0 12px 48px 16px rgba(0,0,0,.03);
+  box-shadow: 0 6px 16px -8px rgba(0,0,0,.08), 0 9px 28px 0 rgba(0,0,0,.05), 0 12px 48px 16px rgba(0,0,0,.03);
 </style>
