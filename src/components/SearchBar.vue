@@ -18,12 +18,10 @@
       </b-row>
       <b-row>
         <b-col md-offset="1">
-          <!-- <b-nav-form> -->
           <b-form-input v-model="keywords" id="search-input" placeholder="请输入关键词"></b-form-input>
           <b-button variant="primary" type="submit" class="search-btn">
             <b-icon icon="search" id="search-icon"></b-icon>搜索
           </b-button>
-          <!-- </b-nav-form> -->
         </b-col>
       </b-row>
     </b-container>
