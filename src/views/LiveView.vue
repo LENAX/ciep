@@ -9,8 +9,8 @@
           sm="6"
           md="4"
           lg="4"
-          v-for="schedule in liveSchedules"
-          :key="schedule.name"
+          v-for="(schedule, index) in liveSchedules"
+          :key="`${schedule.name}-${index}`"
           class="item"
         >
           <IconBox
