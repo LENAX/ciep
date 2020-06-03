@@ -40,6 +40,11 @@ export default new Router({
       path: '/company/:id',
       name: 'company',
       component: () => import(/* webpackChunkName: "about" */ './views/CompanyHomeView.vue')
+    },
+    {
+      path: '/job/:id',
+      name: 'job',
+      component: () => import(/* webpackChunkName: "about" */ './views/JobView.vue')
     }
     /*
     {

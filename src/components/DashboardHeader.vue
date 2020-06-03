@@ -13,7 +13,7 @@
                 </div>
               </b-col>
 
-              <b-col md="4" sm="3" class="d-none d-md-block">
+              <b-col md="4" sm="3" class="d-none d-md-block" v-if="subHeader || subHeaderDescription">
                 <div class="rad-info-box">
                   <span style="text-align: right; font-size: 18px">
                     <slot name="secondaryHeaderImage"></slot>

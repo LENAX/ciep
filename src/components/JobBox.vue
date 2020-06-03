@@ -1,5 +1,5 @@
 <template>
-  <div class="job-box">
+  <div class="job-box" @click="navigateToPath">
     <b-row align-h="center">
       <b-col md=8 sm=8 class="col-xs-12">
         <div class="job-title-box pl-3">
@@ -23,6 +23,15 @@ export default {
     jobDetailUrl: String,
     jobTitle: String,
     jobInfoSummary: String
+  },
+  methods: {
+    navigateToPath: function () {
+      if (this.jobDetailUrl.includes('http') || this.jobDetailUrl.includes('www.')) {
+        window.location = this.jobDetailUrl
+      } else {
+        this.$router.push({ path: this.jobDetailUrl })
+      }
+    }
   }
 }
 </script>

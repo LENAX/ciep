@@ -12,10 +12,16 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faCogs, faMicrochip, faBriefcase,
-  faRobot, faFlask, faBuilding, faMedkit
+  faRobot, faFlask, faBuilding, faMedkit,
+  faMapMarker, faClock, faMoneyCheck,
+  faCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCogs)
+library.add(faCaretRight)
+library.add(faMapMarker)
+library.add(faClock)
+library.add(faMoneyCheck)
 library.add(faMicrochip)
 library.add(faRobot)
 library.add(faFlask)
