@@ -14,7 +14,7 @@ import {
   faCogs, faMicrochip, faBriefcase,
   faRobot, faFlask, faBuilding, faMedkit,
   faMapMarker, faClock, faMoneyCheck,
-  faCaretRight
+  faCaretRight, faVideo
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCogs)
@@ -28,6 +28,7 @@ library.add(faFlask)
 library.add(faBuilding)
 library.add(faMedkit)
 library.add(faBriefcase)
+library.add(faVideo)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
