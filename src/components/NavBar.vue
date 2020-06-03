@@ -15,7 +15,7 @@
           <b-nav-item-dropdown text="会展服务" right>
             <b-dropdown-item href="#">人才参会</b-dropdown-item>
             <b-dropdown-item to="/regguide">企业参会</b-dropdown-item>
-            <b-dropdown-item href="#">
+            <b-dropdown-item to="/live">
               招聘直播间
             </b-dropdown-item>
           </b-nav-item-dropdown>
