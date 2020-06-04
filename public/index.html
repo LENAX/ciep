@@ -1,17 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.png">
-    <title>精英天下·云招会</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but ciep doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.png">
+  <title>精英天下·云招会</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.0/animate.compat.min.css" rel="stylesheet">
+  <style>
+    .spinner {
+      margin: 100px auto;
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .spinner>div {
+      background-color: #0d6aff;
+      height: 100%;
+      width: 6px;
+      display: inline-block;
+      -webkit-animation: stretchDelay 1.2s infinite ease-in-out;
+      animation: stretchDelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+      -webkit-animation-delay: -1.1s;
+      animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    .spinner .rect4 {
+      -webkit-animation-delay: -0.9s;
+      animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+      -webkit-animation-delay: -0.8s;
+      animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes stretchDelay {
+
+      0%,
+      40%,
+      100% {
+        -webkit-transform: scaleY(0.4)
+      }
+
+      20% {
+        -webkit-transform: scaleY(1.0)
+      }
+    }
+
+    @keyframes stretchDelay {
+
+      0%,
+      40%,
+      100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+      }
+
+      20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+      }
+    }
+  </style>
+  <style>
+    .animate__fadeIn {
+      --animate-duration: 2s;
+      --animate-delay: 0.9s;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but ciep doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+    <h3 style="text-align: center !important; font-family: 'Helvetica Neue'">
+      第十八届国际人才交流大会精英天下·云招会正在启动
+    </h3>
+  </div>
+
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

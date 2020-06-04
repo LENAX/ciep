@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="animate__fadeIn"  id="app">
     <NavBar />
     <transition name="fade" mode="out-in">
       <router-view />
@@ -23,7 +23,8 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB, SimSun,sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, SimSun,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
