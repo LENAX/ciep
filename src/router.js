@@ -75,6 +75,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/user/UserAuthView.vue')
     },
     {
+      path: '/password/reset',
+      name: 'passwordReset',
+      component: () => import(/* webpackChunkName: "about" */ './views/user/PasswordResetView.vue')
+    },
+    {
       path: '/profile/:personId',
       name: 'profile',
       component: () => import(/* webpackChunkName: "about" */ './views/profile/ProfileRoot.vue'),
