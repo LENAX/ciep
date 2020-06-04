@@ -27,7 +27,7 @@
                     </div>
                     <div class="heading-inner">
                       <!-- 附上附件下载地址 -->
-                      <h3 class="text-center">附件：参会回执</h3>
+                      <h3 class="text-center" style="font-weight: bold;"><a href="https://branch.szhr.com/static/wp-content/uploads/2020/06/%E9%82%80%E8%AF%B7%E5%87%BD%EF%BC%88%E4%BC%81%E4%B8%9A%EF%BC%890601.doc" target="_blank">点击下载附件：参会回执</a></h3>
                     </div>
                 </div>
             </div>
@@ -56,12 +56,12 @@ h3
   font-family: 'Helvetica Neue'
 
 .heading-inner
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   display: block;
   width: 100%;
   position: relative;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 10px;
 
 .heading-inner .title
   background-color: #f8f9fa!important;
