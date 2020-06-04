@@ -41,7 +41,7 @@ export default {
       selected: 'recruit',
       options: [
         { text: '找工作', value: 'recruit' },
-        { text: '找公司', value: 'company' },
+        { text: '找公司', value: 'company' }
       ]
     }
   }

@@ -8,6 +8,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import VueParticles from 'vue-particles'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
@@ -34,6 +35,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
+Vue.use(VueParticles)
 Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 

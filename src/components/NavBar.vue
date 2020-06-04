@@ -25,8 +25,8 @@
           <b-button variant="link" v-b-modal.contact-modal class="text-dark">联系我们</b-button>
         </b-navbar-nav>
         <div class="user-control">
-          <b-button class="ml-1 mr-1 w-30" variant="outline-primary">登录</b-button>
-          <b-button class="ml-1 mr-1" variant="success">注册</b-button>
+          <b-button class="ml-1 mr-1" variant="outline-primary" to="/auth/login">人才登录</b-button>
+          <b-button class="ml-1 mr-1" variant="success" to="/auth/register">人才注册</b-button>
         </div>
       </b-collapse>
     </b-navbar>

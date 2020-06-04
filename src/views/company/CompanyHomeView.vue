@@ -143,7 +143,6 @@ export default {
 <style lang="sass" scoped>
 .card
   box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
-  padding: 10px 5px 10px 5px
 
 .logo
   width: 120px

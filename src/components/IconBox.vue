@@ -41,6 +41,9 @@ export default {
   cursor: pointer
   -webkit-transition: all .2s cubic-bezier(.645,.045,.355,1)
   transition: all .2s cubic-bezier(.645,.045,.355,1)
+  border-radius: 5px;
+  background: #d5dadd;
+  // box-shadow:  20px 20px 60px #b5b9bc,  -20px -20px 60px #f5fbfe;
 
 .box:hover
   -webkit-box-shadow: 0 6px 16px -8px rgba(0,0,0,.08), 0 9px 28px 0 rgba(0,0,0,.05), 0 12px 48px 16px rgba(0,0,0,.03);

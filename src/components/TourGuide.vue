@@ -15,7 +15,7 @@
           <IconBox
             boxTitle="我要参会"
             description=""
-            navigatePath="/"
+            navigatePath="/auth/register"
           >
             <b-icon class="guide-icon" icon="people"></b-icon>
           </IconBox>

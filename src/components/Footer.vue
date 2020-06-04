@@ -15,7 +15,7 @@
                 <router-link to="/">精英天下首页</router-link>
               </li>
               <li>
-                <router-link to="/">行业导览</router-link>
+                <router-link to="/industries">行业导览</router-link>
               </li>
               <li>
                 <a href="https://www.szhr.com.cn/" target="_blank">深圳人才网</a>
@@ -26,16 +26,16 @@
             <h3>大会服务</h3>
             <ul>
               <li>
-                <router-link to="/">企业注册</router-link>
+                <router-link to="/regguide">企业注册</router-link>
               </li>
               <li>
-                <router-link to="/">人才注册</router-link>
+                <router-link to="/auth/register">人才注册</router-link>
               </li>
               <li>
-                <router-link to="/">参会企业</router-link>
+                <router-link to="/about">大会简介</router-link>
               </li>
               <li>
-                <router-link to="/">宣讲直播</router-link>
+                <router-link to="/live">宣讲直播</router-link>
               </li>
             </ul>
           </div>
