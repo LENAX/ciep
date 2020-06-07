@@ -13,7 +13,6 @@
           <b-nav-item href="http://www.ciep.gov.cn/" target="_blank">大会官网</b-nav-item>
           <b-nav-item to="/industries">行业展区</b-nav-item>
           <b-nav-item-dropdown text="会展服务" right>
-            <b-dropdown-item href="#">人才参会</b-dropdown-item>
             <b-dropdown-item to="/regguide">企业参会</b-dropdown-item>
             <b-dropdown-item to="/live">
               招聘直播间

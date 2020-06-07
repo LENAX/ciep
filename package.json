@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "start": "nodemon --exec babel-node ./src/index.js",
+    "test": "mocha 'test/unit/*/*.js' --require node_modules/@babel/register node_modules/@vue/test-utils --recursive --reporter mocha-junit-reporter --timeout 60000 --exit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
@@ -17,6 +20,7 @@
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
     "core-js": "^2.6.5",
+    "mocha-promise-me": "^1.0.1",
     "particle.js": "^1.0.7",
     "vue": "^2.6.10",
     "vue-fontawesome": "0.0.2",
@@ -25,14 +29,31 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
+    "@babel/runtime": "^7.10.2",
+    "@fromage/cli-plugin-unit-mocha": "^5.0.79",
     "@vue/cli-plugin-babel": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.12.0",
+    "@vue/cli-plugin-unit-mocha": "^4.4.1",
     "@vue/cli-service": "^3.12.0",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.0.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "cypress": "^4.7.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^7.2.0",
+    "mocha-junit-reporter": "^1.23.3",
     "node-sass": "^4.12.0",
+    "nodemon": "^2.0.4",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
   }

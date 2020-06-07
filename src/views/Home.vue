@@ -1,28 +1,18 @@
 <template>
   <div class="home">
-    <img
-      class="img-fluid"
-      alt="ciep theme banner"
-      src="@/assets/img/ciep_banner.jpg"
-    />
-    <SearchBar />
-    <TourGuide />
-    <ContactModal />
+    <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SearchBar from '@/components/SearchBar.vue'
-import TourGuide from '@/components/TourGuide.vue'
-import ContactModal from '@/components/ContactModal.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
-    SearchBar,
-    TourGuide,
-    ContactModal
+    HelloWorld
   }
 }
 </script>
