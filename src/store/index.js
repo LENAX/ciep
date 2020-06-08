@@ -1,8 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import cart from './modules/cart'
-import products from './modules/products'
+
+import auth from './modules/auth'
+import user from './modules/user'
+import registrationForm from './modules/registrationForm'
+import loginForm from './modules/loginForm'
+
 import createLogger from 'vuex/dist/logger'
+
+import createPersistedState from "vuex-persistedstate";
+
 
 Vue.use(Vuex)
 
@@ -10,9 +17,16 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    cart,
-    products
+    auth,
+    user,
+    registrationForm,
+    loginForm
   },
   strict: debug,
-  plugins: debug ? [createLogger()] : []
+  plugins: debug ? [
+    createLogger(),
+    createPersistedState()
+  ] : [
+    createPersistedState()
+  ]
 })
