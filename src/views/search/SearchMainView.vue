@@ -1,18 +1,20 @@
 <template>
   <div class="search-main-view particle-bg">
     <vue-particles color="#dedede"></vue-particles>
-    <b-container class="bv-example-row bv-example-row-flex-cols">
-      <b-row align-v="center">
-        <b-col md="8" offset-md="2" lg="8" offset-lg="2" sm="12" align-self="center">
-          <b-card class="auth-card bg-light-gray">
-            <img src="@/assets/img/auth_bg.jpeg" class="img-fluid mb-1" alt="auth background">
-            <div class="card-content pt-1 pb-3">
-              <SearchBar></SearchBar>
-            </div>
-          </b-card>
-        </b-col>
-      </b-row>
-    </b-container>
+    <transition appear>
+      <b-container class="bv-example-row bv-example-row-flex-cols">
+        <b-row align-v="center">
+          <b-col md="8" offset-md="2" lg="8" offset-lg="2" sm="12" align-self="center">
+            <b-card class="auth-card bg-light-gray">
+              <img src="@/assets/img/auth_bg.jpeg" class="img-fluid mb-1" alt="auth background">
+              <div class="card-content pt-1 pb-3">
+                <SearchBar></SearchBar>
+              </div>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-container>
+    </transition>
   </div>
 </template>
 

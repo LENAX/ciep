@@ -1,35 +1,37 @@
 <template>
   <div class="search-result">
-    <FeatureBoxSection sectionTitle="搜索结果">
-      <template v-slot:banner>
-        <vue-particles color="#dedede"></vue-particles>
-        <b-container class="bv-example-row bv-example-row-flex-cols pt-2 pb-2">
-          <b-row align-v="center">
-            <b-col md="8" offset-md="2" lg="8" offset-lg="2" sm="12" align-self="center">
-              <b-card class="auth-card bg-light-gray">
-                <div class="card-content pt-1 pb-3">
-                  <SearchBar></SearchBar>
-                </div>
-              </b-card>
-            </b-col>
-          </b-row>
-        </b-container>
-      </template>
-      <template v-slot:feature-boxes>
-        <b-col
-          sm="12"
-          md="8"
-          lg="8"
-          v-for="(result, index) in searchResult"
-          :key="`search-result-item-${index}`"
-          class="mt-1 mb-1"
-        >
-          <b-card class="p-4" :title="result.resultTitle" @click="navigateToPath(result.resultDetailURL)">
-            <b-card-text>{{ result.resultDescription }}</b-card-text>
-          </b-card>
-        </b-col>
-      </template>
-    </FeatureBoxSection>
+    <transition appear>
+      <FeatureBoxSection sectionTitle="搜索结果">
+        <template v-slot:banner>
+          <vue-particles color="#dedede"></vue-particles>
+          <b-container class="bv-example-row bv-example-row-flex-cols pt-2 pb-2">
+            <b-row align-v="center">
+              <b-col md="8" offset-md="2" lg="8" offset-lg="2" sm="12" align-self="center">
+                <b-card class="auth-card bg-light-gray">
+                  <div class="card-content pt-1 pb-3">
+                    <SearchBar></SearchBar>
+                  </div>
+                </b-card>
+              </b-col>
+            </b-row>
+          </b-container>
+        </template>
+        <template v-slot:feature-boxes>
+          <b-col
+            sm="12"
+            md="8"
+            lg="8"
+            v-for="(result, index) in searchResult"
+            :key="`search-result-item-${index}`"
+            class="mt-1 mb-1"
+          >
+            <b-card class="p-4" :title="result.resultTitle" @click="navigateToPath(result.resultDetailURL)">
+              <b-card-text>{{ result.resultDescription }}</b-card-text>
+            </b-card>
+          </b-col>
+        </template>
+      </FeatureBoxSection>
+    </transition>
   </div>
 </template>
 
