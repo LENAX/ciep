@@ -1,7 +1,8 @@
 /**
  * Mocking client-server processing
  */
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
+
 const mockPrivateKey = 'bslFffROBFIdKYX2y4kEKr8FVq6jY0QpIDfVcye3okw'
 const _users = [{
   createDt: null,
@@ -108,29 +109,74 @@ function validateUserAuthData (userAuthData) {
   })
 }
 
+async function validateToken (token) {
+  /**
+   * Use jwt to decode token and check whether the decoded data is a valid user data
+   */
+  const decodedToken = jwt.verify(token, mockPrivateKey, (err, decoded) => {
+    try {
+      return decoded
+    } catch (err) {
+      throw err
+    }
+  })
+  return validateUserAuthData(decodedToken.body)
+}
+
 export default {
+  async requestUserDataById(userId, token) {
+    try {
+      const tokenVerificationState = await validateToken(token)
+      if (tokenVerificationState) {
+        const requestedUser = _users.filter(usr => {
+          return usr.personId === userId
+        })
+        if (requestedUser.length === 1) {
+          return JSON.jsonify({
+            data: requestedUser,
+            message: 'ok',
+            redirect: '',
+            status: 'success'
+          })
+        } else {
+          throw Error(`User with ${userId} not found.`)
+        }
+      } else {
+        throw Error('Invalid token')
+      }
+    } catch (e) {
+      return JSON.jsonify({
+        data: null,
+        message: e.message,
+        redirect: '',
+        status: 'fail'
+      })
+    }
+  },
   async requestAccessToken (userAuthData) {
     try {
-      let authorizedUser = await validateUserAuthData(userAuthData)
-      if (authorizedUser) {
-        let jwtToken = jwt.sign(
-          authorizedUser,
-          mockPrivateKey,
-          { algorithm: 'HS256' },
-          function (err, token) {
-            if (err) {
-              console.log(err)
-              throw err
+      const response = validateUserAuthData(userAuthData).then(authorizedUser => {
+        if (authorizedUser) {
+          let jwtToken = jwt.sign(
+            authorizedUser,
+            mockPrivateKey,
+            { algorithm: 'HS256' },
+            function (err, token) {
+              if (err) {
+                console.log(err)
+                throw err
+              }
+              return token
             }
-            return token
-          }
-        )
-        return JSON.jsonify({
-          accessToken: jwtToken,
-          status: 'success',
-          message: 'Successfully obtained access token!'
-        })
-      }
+          )
+          return JSON.jsonify({
+            accessToken: jwtToken,
+            status: 'success',
+            message: 'Successfully obtained access token!'
+          })
+        }
+      })
+      return response
     } catch (e) {
       return JSON.jsonify({
         accessToken: '',
