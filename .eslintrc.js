@@ -9,5 +9,12 @@ module.exports = {
         mocha: true
       }
     }
-  ]
+  ],
+
+  'extends': 'plugin:vue/essential',
+
+  rules: {
+    'vue/attribute-hyphenation': 'warning',
+    'vue/html-end-tags': 'warning'
+  }
 }
