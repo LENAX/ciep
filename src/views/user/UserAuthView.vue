@@ -18,15 +18,6 @@
                 </b-tabs>
               </div>
             </b-card>
-            <!-- <b-alert
-              v-model="showBottom"
-              class="position-fixed fixed-bottom m-0 rounded-0"
-              style="z-index: 2000;"
-              variant="warning"
-              dismissible
-            >
-              Fixed position (bottom) alert!
-            </b-alert> -->
           </b-col>
         </b-row>
       </b-container>

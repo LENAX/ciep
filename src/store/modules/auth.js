@@ -1,55 +1,69 @@
-import requestAccessToken from '../../api/userAuth.js'
-
-// initial state
-// shape: [{ id, quantity }]
 const state = () => ({
   accessToken: '',
   isLoggedIn: false
 })
 
 // getters
-const getters = {
-  // cartProducts: (state, getters, rootState) => {
-  //   return state.items.map(({ id, quantity }) => {
-  //     const product = rootState.products.all.find(product => product.id === id)
-  //     return {
-  //       title: product.title,
-  //       price: product.price,
-  //       quantity
-  //     }
-  //   })
-  // },
-
-  // cartTotalPrice: (state, getters) => {
-  //   return getters.cartProducts.reduce((total, product) => {
-  //     return total + product.price * product.quantity
-  //   }, 0)
-  // }
-}
+const getters = {}
 
 // mutations
 const mutations = {
-  setAccessToken (state, token) {
+  setAccessToken(state, token) {
     state.accessToken = token
   },
 
-  setLoginState (state, loginState) {
+  setLoginState(state, loginState) {
     state.isLoggedIn = loginState
   }
 }
 
 // actions
 const actions = {
-  async getAccessToken ({ commit, state }, userAuthData) {
-    const tokenRequestResponse = await requestAccessToken(userAuthData)
-    const parsedResponse = JSON.parse(tokenRequestResponse)
-
-    if (parsedResponse.status === 'success' && parsedResponse.accessToken !== '') {
-      commit('setAccessToken', tokenRequestResponse.accessToken)
-      commit('setLoginState', true)
-    } else {
+  async sendLoginRequest({ commit, state }, authData) {
+    try {
+      let response = await fetch(`/rosp/api/person/login`, {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          mobilePhone: authData.phone,
+          password: authData.password
+        })
+      })
+      let result = await response.json()
+      return result
+    } catch (err) {
+      console.error(err.message)
+      throw err
+    }
+  },
+  logout({ commit, state }) {
+    try {
       commit('setAccessToken', '')
       commit('setLoginState', false)
+      commit('user/deleteUser', true, { root: true })
+    } catch (err) {
+      console.error(err.message)
+      throw err
+    }
+  },
+  async getAccessToken({ commit, state }, userAuthData) {
+    try {
+      const response = await fetch('/rosp/api/request/getToken', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(userAuthData)
+      })
+      const result = await response.json()
+      return result
+    } catch (err) {
+      console.error(err.message)
+      throw err
     }
   }
 }
