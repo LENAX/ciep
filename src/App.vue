@@ -71,18 +71,33 @@ export default {
           console.error("Failed to fetch access token. I have to retry later.");
         }
       });
+    },
+    setRequestHeaders() {
+      const enTokenStr = storageGet("/auth/credentials");
+      const tokenStr = this.CryptoJS.AES.decrypt(
+        enTokenStr,
+        process.env.VUE_APP_SESS_ENCRPYTION_KEY
+      ).toString();
+      const access_token = JSON.parse(tokenStr);
+      // this.axios.defaults.headers.common = {
+      //   "Access-Control-Allow-Origin": "*",
+      //   "Content-Type": "application/json;charset=utf-8",
+      //   "access_token": access_token
+      // };
+      this.axios.defaults.headers.common['access_token'] = access_token;
     }
   },
   beforeMount() {
     // Store appid and appsecret to sessionStorage
     const authData = this.getAuthDataFromEnv();
     this.saveAuthDataToSession(authData);
-    this.requestAccessToken();
+    this.requestAccessToken(authData);
   },
   mounted() {
     const vm = this;
     setInterval(function() {
       vm.requestAccessToken(vm.getAuthDataFromEnv());
+      vm.setRequestHeaders();
     }, process.env.VUE_APP_AUTO_REFRESH_SECONDS);
   },
   beforeDestroy() {

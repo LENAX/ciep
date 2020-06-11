@@ -70,17 +70,12 @@ export default {
         );
         if (
           userLoginResponse.status === "success" &&
-          userLoginResponse.data != null &&
-          userLoginResponse.data.token.length > 0
+          userLoginResponse.data != null
         ) {
-          this.$store.commit(
-            "auth/setAccessToken",
-            userLoginResponse.data.token
-          );
           this.$store.commit("auth/setLoginState", true);
           this.$store.commit("loginForm/setLoginAttempt", 0);
           const enUserData = this.CryptoJS.AES.encrypt(
-            JSON.stringify(userLoginResponse.data.user),
+            JSON.stringify(userLoginResponse.data),
             process.env.VUE_APP_SESS_ENCRPYTION_KEY
           ).toString();
           this.$store.commit("user/setUserAttributes", enUserData);

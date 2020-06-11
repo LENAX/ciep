@@ -21,11 +21,26 @@ const mutations = {
 const actions = {
   async sendLoginRequest({ commit, state }, authData) {
     try {
+      // let response = await this._vm.axios.post(
+      //   '/rosp/api/person/login',
+      //   {
+      //     params: JSON.stringify({
+      //       mobilePhone: authData.phone,
+      //       password: authData.password
+      //     }),
+      //     headers: {
+      //       "Content-Type": "application/json;charset=utf-8",
+      //       'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE4NTkyOTQsImFwcElkIjoiMjAyMCIsInNlY3JldEtleSI6IjEyMzQ1NiJ9.G1OmrKGV24zCATsLNjipzqX-FcrL6Vmx4BIci0g2oMU'
+      //     }
+      //   })
+      // console.log(response)
+      // return response
       let response = await fetch(`/rosp/api/person/login`, {
         method: 'POST',
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=utf-8'
+          'Content-Type': 'application/json;charset=utf-8',
+          'access_token': state.accessToken
         },
         body: JSON.stringify({
           mobilePhone: authData.phone,

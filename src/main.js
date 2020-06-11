@@ -12,6 +12,9 @@ import VueCryptojs from 'vue-cryptojs'
 
 Vue.use(VueCryptojs)
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 import VueParticles from 'vue-particles'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -48,6 +51,8 @@ Vue.config.productionTip = false
 // Vuex
 Vue.use(Vuex)
 
+// Vue axios
+Vue.use(VueAxios, axios)
 
 new Vue({
   router,
