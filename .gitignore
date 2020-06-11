@@ -33,3 +33,5 @@ package.json
 .eslintrc.js
 vue.config.js
 test-results.xml
+package-lock.json
+package.json
