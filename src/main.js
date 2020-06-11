@@ -8,6 +8,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueCryptojs from 'vue-cryptojs'
+
+Vue.use(VueCryptojs)
 
 import VueParticles from 'vue-particles'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -18,6 +21,8 @@ import {
   faMapMarker, faClock, faMoneyCheck,
   faCaretRight, faVideo
 } from '@fortawesome/free-solid-svg-icons'
+
+
 
 library.add(faCogs)
 library.add(faCaretRight)
@@ -43,8 +48,13 @@ Vue.config.productionTip = false
 // Vuex
 Vue.use(Vuex)
 
+
 new Vue({
   router,
   store,
   render: h => h(App)
+  // mounted() {
+  //   console.log(this)
+  //   this.$rsa.generateKeys(1024)
+  // }
 }).$mount('#app')
