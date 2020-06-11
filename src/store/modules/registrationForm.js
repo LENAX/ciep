@@ -2,26 +2,32 @@ const state = () => ({
   email: '',
   phone: '',
   smsValCode: '',
+  phoneValidated: false,
   smsRequestCountdown: 0,
-  realSMSValCode: null,
+  smsRequestState: false,
+  smsRequestAwaiting: false,
   smsButtonText: '获取验证码',
   password: '',
   passwordConfirmation: '',
+  formSubmit: false
 })
 
 // getters
 const getters = {
+  smsRequestSuccessful: (state, getters, rootState) => {
+    return (!state.smsRequestAwaiting && state.smsRequestState)
+  },
   validEmail: (state, getters, rootState) => {
     const email_pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return email_pattern.length === 0 || email_pattern.test(state.email)
+    return state.email.length === 0 || email_pattern.test(state.email)
   },
   validPhone: (state, getters, rootState) => {
     const phone_pattern = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/
-    return phone_pattern.length === 0 || phone_pattern.test(state.phone)
+    return state.phone.length === 0 || phone_pattern.test(state.phone)
   },
   validPassword: (state, getters, rootState) => {
     const password_patten = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-    return password_patten.length === 0 || password_patten.test(state.password)
+    return state.password.length === 0 || password_patten.test(state.password)
   },
   isPasswordMatch: (state, getters, rootState) => {
     return state.password === state.passwordConfirmation
@@ -34,7 +40,7 @@ const getters = {
 // mutations
 const mutations = {
   setEmail(state, value) {
-     state.email = value
+    state.email = value
   },
   setPhone(state, value) {
     state.phone = value
@@ -42,8 +48,8 @@ const mutations = {
   setSMSValCode(state, value) {
     state.smsValCode = value
   },
-  setRealSMSValCode(state, value) {
-    state.realSMSValCode = value
+  setSmsRequestSuccessful(state, value) {
+    state.smsRequestSuccessful = value
   },
   setSmsRequestCountdown(state, value) {
     state.smsRequestCountdown = value
@@ -59,30 +65,85 @@ const mutations = {
   },
   setSMSButtonText(state, value) {
     state.smsButtonText = value
+  },
+  setSMSRequestAwaiting(state, value) {
+    state.smsRequestAwaiting = value
+  },
+  setPhoneValidated(state, value) {
+    state.phoneValidated = value
+  },
+  setFormSubmit(state, value) {
+    state.formSubmit = value
   }
 }
 
 // actions
 const actions = {
-  submitRegistrationForm ({ commit, state}, formData) {
-
+  async submitRegistrationForm({ commit, state }) {
+    try {
+      let response = await fetch(`/rosp/api/person/register`, {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          email: state.email,
+          mobilePhone: state.phone,
+          password: state.password
+        })
+      })
+      let result = await response.json()
+      return result
+    } catch (err) {
+      console.error(err.message)
+      throw err
+    }
   },
-  requestSMSValCode ({ commit, state }, phone) {
+  async validateSMSValCode({ commit, state }, valData) {
+    try {
+      console.log(valData)
+      const param_str = `phone=${valData.phone}&code=${valData.code}`
+      // const respJSON = await fetch(`/smsService/verfication?${param_str}`, { method: 'GET' })
+      fetch(`/smsService/verification?${param_str}`,
+        { method: 'GET' }
+      ).then(resp => {
+        resp.json().then(function (data) {
+          commit('setPhoneValidated', data.verified)
+        })
+      })
+    } catch (err) {
+      console.error(err.message)
+      throw err
+    }
+  },
+  async requestSMSValCode({ commit, state }, phone) {
     /**
      * Get sms validation code
      */
     try {
-      setTimeout(function() {
-        const code = Math.floor(Math.random() * 100000) + 100000
-        commit('setRealSMSValCode', code)
-      }, 100)
-      console.log(`sms code: ${state.realSMSValCode}`)
+      const smsServerURL = process.env.VUE_APP_SMS_SERVER_ROOT
+      commit('setSMSRequestAwaiting', true)
+      fetch(`/smsService/sms?phone=${phone}`, {
+        method: 'GET'
+      }).then(resp => {
+        resp.json().then(data => {
+          try {
+            console.log(data)
+            const status = data.SendStatusSet[0]
+            commit('setSmsRequestSuccessful', (status.Code === 'Ok' && status.Message == 'send success'))
+            commit('setSMSRequestAwaiting', false)
+          } catch (err) {
+            throw err
+          }
+        })
+      })
     } catch (err) {
       console.log(err.message)
       throw err
     }
   },
-  triggerSMSCoolDown ({ commit, state }, countdownSeconds) {
+  triggerSMSCoolDown({ commit, state }, countdownSeconds) {
     commit('setSmsRequestCountdown', countdownSeconds)
     commit('setSMSButtonText', `${state.smsRequestCountdown} 秒后重新发送`)
     // count seconds
