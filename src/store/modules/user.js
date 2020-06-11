@@ -1,47 +1,28 @@
 import {
-  requestUserDataById
-} from '../../api/userAuth.js'
+  storageAdd,
+  storageGet,
+  storageDelete
+} from '../../sessionStore/sessStore'
 
 // initial state
 // shape: [{ id, quantity }]
-const state = () => ({
-  createDt: null,
-  createdBy: 0,
-  dob: '',
-  email: '',
-  expectIndustry: '',
-  expectPosition: '',
-  expectSalary: '',
-  expectWorkCity: '',
-  gender: '',
-  graduateYear: '',
-  highestEdu: '',
-  inactive: false,
-  lastCompany: '',
-  lastLoginDt: null,
-  lastPosition: '',
-  loginRetryTimes: 0,
-  major: '',
-  mobilePhone: '',
-  overseas: false,
-  password: null,
-  personId: null,
-  personName: '',
-  photoLink: '',
-  receiveSms: true,
-  remark: '',
-  schoolName: '',
-  selfComment: ''
-})
+const state = () => ({})
 
 // getters
-const getters = {}
+const getters = {
+  userData: function (state, getters, rootState) {
+    const user = storageGet('/user/data')
+    return user
+  }
+}
 
 // mutations
 const mutations = {
   setUserAttributes(state, attributes) {
-    Object.assign(state, attributes)
-    console.log(state)
+    storageAdd('/user/data', attributes)
+  },
+  deleteUser(state) {
+    storageDelete('/user/data')
   }
 }
 
@@ -55,7 +36,7 @@ const actions = {
       const userAttrRequestResponse = await requestUserDataById(userId, authToken)
       const parsedResponse = JSON.parse(userAttrRequestResponse)
 
-      (parsedResponse.status === 'success' && parsedResponse.data !== null) ?
+        (parsedResponse.status === 'success' && parsedResponse.data !== null) ?
         commit('setUserAttributes', parsedResponse.data) :
         commit('setUserAttributes', parsedResponse.data)
     } catch (err) {
