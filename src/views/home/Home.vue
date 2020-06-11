@@ -7,7 +7,6 @@
     />
     <SearchBar />
     <TourGuide />
-    <ContactModal />
   </div>
 </template>
 
@@ -15,14 +14,12 @@
 // @ is an alias to /src
 import SearchBar from '@/components/SearchBar.vue'
 import TourGuide from '@/components/TourGuide.vue'
-import ContactModal from '@/components/ContactModal.vue'
 
 export default {
   name: 'Home',
   components: {
     SearchBar,
-    TourGuide,
-    ContactModal
+    TourGuide
   }
 }
 </script>
