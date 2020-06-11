@@ -9,7 +9,8 @@ import loginForm from './modules/loginForm'
 import createLogger from 'vuex/dist/logger'
 
 import createPersistedState from "vuex-persistedstate";
-
+import SecureLS from "secure-ls";
+var ls = new SecureLS({ encodingType: 'aes', isCompression: false });
 
 Vue.use(Vuex)
 
@@ -25,8 +26,20 @@ export default new Vuex.Store({
   strict: debug,
   plugins: debug ? [
     createLogger(),
-    createPersistedState()
+    createPersistedState({
+      storage: {
+        getItem: (key) => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: (key) => ls.remove(key),
+      },
+    }),
   ] : [
-    createPersistedState()
-  ]
+      createPersistedState({
+        storage: {
+          getItem: (key) => ls.get(key),
+          setItem: (key, value) => ls.set(key, value),
+          removeItem: (key) => ls.remove(key),
+        },
+      }),
+    ]
 })
