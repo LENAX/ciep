@@ -1,24 +1,95 @@
 <template>
-  <div class="animate__fadeIn"  id="app">
+  <div class="animate__fadeIn" id="app">
     <NavBar />
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
     <Footer />
+    <ContactModal />
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
+import NavBar from "@/components/NavBar.vue";
+import Footer from "@/components/Footer.vue";
+import ContactModal from "@/components/ContactModal.vue";
+
+import { createNamespacedHelpers } from "vuex";
+
+const {
+  mapState,
+  mapActions,
+  mapMutations,
+  mapGetters
+} = createNamespacedHelpers("auth");
+
+import {
+  storageAdd,
+  storageGet,
+  storageDelete
+} from "@/sessionStore/sessStore";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     NavBar,
-    Footer
+    Footer,
+    ContactModal
+  },
+  methods: {
+    ...mapMutations(["setAccessToken"]),
+    ...mapActions(["getAccessToken"]),
+    getAuthDataFromEnv() {
+      let appid = "";
+      let appsecret = "";
+      if (process.env.NODE_ENV === "production") {
+        appid = process.env.VUE_APP_PRODUCTION_APP_ID;
+        appsecret = process.env.VUE_APP_PRODUCTION_APP_SECRET;
+      }
+      if (process.env.NODE_ENV == "development") {
+        appid = process.env.VUE_APP_TEST_APP_ID;
+        appsecret = process.env.VUE_APP_TEST_APP_SECRET;
+      }
+      const authData = {
+        appId: appid,
+        secretKey: appsecret
+      };
+      return authData;
+    },
+    saveAuthDataToSession(authData) {
+      const enAuthData = this.CryptoJS.AES.encrypt(
+        JSON.stringify(authData),
+        process.env.VUE_APP_SESS_ENCRPYTION_KEY
+      ).toString();
+      storageAdd("/auth/credentials", enAuthData);
+    },
+    requestAccessToken(authData) {
+      this.getAccessToken(authData).then(response => {
+        if (response.status === "success") {
+          this.setAccessToken(response.data);
+        } else {
+          console.error("Failed to fetch access token. I have to retry later.");
+        }
+      });
+    }
+  },
+  beforeMount() {
+    // Store appid and appsecret to sessionStorage
+    const authData = this.getAuthDataFromEnv();
+    this.saveAuthDataToSession(authData);
+    this.requestAccessToken();
+  },
+  mounted() {
+    const vm = this;
+    setInterval(function() {
+      vm.requestAccessToken(vm.getAuthDataFromEnv());
+    }, process.env.VUE_APP_AUTO_REFRESH_SECONDS);
+  },
+  beforeDestroy() {
+    // delete everything in sessionStorage
+    storageDelete("/auth/credentials");
   }
-}
+};
 </script>
 
 <style lang="scss">
