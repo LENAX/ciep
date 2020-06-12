@@ -5,6 +5,8 @@ import auth from './modules/auth'
 import user from './modules/user'
 import registrationForm from './modules/registrationForm'
 import loginForm from './modules/loginForm'
+import authView from './modules/authView'
+import query from './modules/query'
 
 import createLogger from 'vuex/dist/logger'
 
@@ -21,7 +23,9 @@ export default new Vuex.Store({
     auth,
     user,
     registrationForm,
-    loginForm
+    loginForm,
+    authView,
+    query
   },
   strict: debug,
   plugins: debug ? [
