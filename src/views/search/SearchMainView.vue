@@ -1,6 +1,6 @@
 <template>
   <div class="search-main-view particle-bg">
-    <vue-particles color="#dedede"></vue-particles>
+    <!-- <vue-particles color="#dedede"></vue-particles> -->
     <transition appear>
       <b-container class="bv-example-row bv-example-row-flex-cols">
         <b-row align-v="center">
@@ -22,10 +22,36 @@
 import '@/assets/sass/particles.sass'
 import SearchBar from '@/components/SearchBar.vue'
 
+import { createNamespacedHelpers } from "vuex";
+
+const {
+  mapState,
+  mapActions,
+  mapGetters,
+  mapMutations
+} = createNamespacedHelpers("query");
+
+
 export default {
   name: 'SearchMainView',
   components: {
     SearchBar
+  },
+  computed: {
+    ...mapState([
+      "results",
+      "pageSize",
+      "pageIndex"
+    ])
+  },
+  methods: {
+    ...mapActions(["submitQuery"]),
+    ...mapMutations([
+      "setQueryLoading",
+      "setPageSize",
+      "setPageIndex",
+      "setResults"
+    ]),
   }
 
 }

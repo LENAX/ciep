@@ -19,8 +19,19 @@
       <b-row>
         <b-col md-offset="1">
           <b-form-input v-model="keywords" id="search-input" placeholder="请输入关键词"></b-form-input>
-          <b-button variant="primary" type="submit" class="search-btn">
-            <b-icon icon="search" id="search-icon"></b-icon>搜索
+          <b-button
+            :disabled="queryLoading"
+            variant="primary"
+            type="submit"
+            class="search-btn"
+            @click="handleSubmitQuery"
+          >
+            <div v-if="!queryLoading">
+              <b-icon icon="search" id="search-icon"></b-icon>搜索
+            </div>
+            <div class="pl-2 pr-2">
+              <b-spinner class="ml-1 mr-1" small v-if="queryLoading" label="Loading..."></b-spinner>
+            </div>
           </b-button>
         </b-col>
       </b-row>
@@ -29,23 +40,78 @@
 </template>
 
 <script>
-// import AntRadio from '@/components/AntRadio.vue'
-// import AntRadioGroup from '@/components/AntRadioGroup.vue'
+import { createNamespacedHelpers } from "vuex";
+
+const {
+  mapState,
+  mapActions,
+  mapGetters,
+  mapMutations
+} = createNamespacedHelpers("query");
 
 export default {
-  name: 'SearchBar',
-  data () {
-    return {
-      keywords: '',
-      search_type: '',
-      selected: 'recruit',
-      options: [
-        { text: '找工作', value: 'recruit' },
-        { text: '找公司', value: 'company' }
-      ]
+  name: "SearchBar",
+  methods: {
+    ...mapActions(["submitQuery"]),
+    ...mapMutations([
+      "setQueryLoading",
+      "setPageSize",
+      "setPageIndex",
+      "setResults"
+    ]),
+    async handleSubmitQuery() {
+      try {
+        this.setQueryLoading(true);
+        const response = await this.submitQuery();
+        await setTimeout(() => {
+          this.setQueryLoading(false);
+        }, 100);
+        console.log(response);
+        if (
+          response.data.message === "ok" &&
+          response.data.status === "success"
+        ) {
+          this.setResults(response.data.data.data)
+        }
+        console.log(this.$route)
+        const searchTypeInRoute = this.$route.path.split('/')[-1]
+        if (!this.$route.path.includes(this.searchType) || searchTypeInRoute != this.searchType) {
+          this.$router.push(`/search/results/${this.searchType}`)
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
+  },
+  computed: {
+    keywords: {
+      get() {
+        return this.$store.state.query.keywords;
+      },
+      set(value) {
+        this.$store.commit("query/setKeywords", value);
+      }
+    },
+    searchType: {
+      get() {
+        return this.$store.state.query.searchType;
+      },
+      set(value) {
+        this.$store.commit("query/setSearchType", value);
+      }
+    },
+    selected: {
+      get() {
+        return this.$store.state.query.selected;
+      },
+      set(value) {
+        this.$store.commit("query/setSearchType", value);
+      }
+    },
+    ...mapState(["jobFairId", "options", "queryLoading"])
   }
-}
+};
 </script>
 
 <style scoped>
