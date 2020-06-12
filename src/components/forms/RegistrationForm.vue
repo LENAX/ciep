@@ -4,6 +4,15 @@
       <b-form-row class="mt-3 mb-3">
         <b-col cols="8" offset="2" class="mt-3">
           <b-form-input
+            v-model="name"
+            type="text"
+            required
+            aria-autocomplete="true"
+            placeholder="姓名"
+          ></b-form-input>
+        </b-col>
+        <b-col cols="8" offset="2" class="mt-3">
+          <b-form-input
             v-model="email"
             type="email"
             required
@@ -100,6 +109,14 @@ export default {
     this.$store.commit("registrationForm/setPhoneValidated", false);
   },
   computed: {
+    name: {
+      get() {
+        return this.$store.state.registrationForm.name;
+      },
+      set(value) {
+        this.$store.commit("registrationForm/setName", value);
+      }
+    },
     email: {
       get() {
         return this.$store.state.registrationForm.email;
@@ -165,23 +182,33 @@ export default {
         await this.$store.dispatch("registrationForm/validateSMSValCode", {
           phone: this.phone,
           code: this.$store.state.registrationForm.smsValCode
+        }).then(response => {
+          console.log(`this.phoneValidated: ${this.phoneValidated}`)
+          if (!this.$store.state.registrationForm.phoneValidated) {
+            console.log(this.phoneValidated)
+            return false;
+          }
         });
-        if (!this.phoneValidated) {
-          return false;
-        }
-
         const response = await this.$store.dispatch(
           "registrationForm/submitRegistrationForm"
         );
+        console.log(response)
+
         if (response.message === "ok" && response.status === "success") {
           this.$bvToast.toast(`注册成功！`, {
             title: "您已成功注册！即将跳转登录页面。",
             autoHideDelay: 5000,
             appendToast: false
           });
-          setTimeout(function() {
-            this.$router.push("/auth/login");
-          }, 2000);
+          const vm = this;
+          await setTimeout(function() {
+            console.log(vm.$router)
+            if (vm.$router.path === '/auth/login') {
+              vm.$store.commit('authView/currentActiveTabName', 'login');
+            } else {
+              vm.$router.push("/auth/login");
+            }
+          }, 1000);
         } else {
           this.$bvToast.toast(`注册失败！`, {
             title: `失败原因: ${response.message}`,

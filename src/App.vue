@@ -36,9 +36,12 @@ export default {
     Footer,
     ContactModal
   },
+  computed: {
+    ...mapState(["authCode"])
+  },
   methods: {
-    ...mapMutations(["setAccessToken"]),
-    ...mapActions(["getAccessToken"]),
+    ...mapMutations(["setAuthCode"]),
+    ...mapActions(["getAuthCode"]),
     getAuthDataFromEnv() {
       let appid = "";
       let appsecret = "";
@@ -63,40 +66,56 @@ export default {
       ).toString();
       storageAdd("/auth/credentials", enAuthData);
     },
-    requestAccessToken(authData) {
-      this.getAccessToken(authData).then(response => {
+    requestAuthCode(authData) {
+      this.$store.dispatch("auth/getAuthCode",authData).then(response => {
         if (response.status === "success") {
-          this.setAccessToken(response.data);
+          this.setAuthCode(response.data);
         } else {
           console.error("Failed to fetch access token. I have to retry later.");
         }
       });
     },
     setRequestHeaders() {
-      const enTokenStr = storageGet("/auth/credentials");
-      const tokenStr = this.CryptoJS.AES.decrypt(
-        enTokenStr,
-        process.env.VUE_APP_SESS_ENCRPYTION_KEY
-      ).toString();
-      const access_token = JSON.parse(tokenStr);
-      // this.axios.defaults.headers.common = {
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Content-Type": "application/json;charset=utf-8",
-      //   "access_token": access_token
-      // };
-      this.axios.defaults.headers.common['access_token'] = access_token;
+      this.axios.defaults.headers.common['Authentication'] = this.accessToken;
+    },
+    setGlobalIntercepter() {
+      const vm = this
+      this.axios.interceptors.response.use(function (response) {
+        // if authCode is expired
+        console.log(`In Interceptor: ${JSON.stringify(response)}`)
+        if (response.data.status === 'failed' && response.data.message.includes('校验失败')) {
+          console.log("Resend auth code request!")
+          vm.requestAuthCode(authData(vm.getAuthDataFromEnv()))
+          if (vm.$store.state.auth.isLoggedIn) {
+            vm.$bvToast.toast(`请注销后重新登录`, {
+              title: "您的登录状态已过期",
+              autoHideDelay: 5000,
+              appendToast: false
+            });
+          }
+        }
+        // if access token is expired
+        // response 是请求回来的数据
+        return response;
+        }, function (error) {
+          // 对响应错误做点什么
+          return Promise.reject(error)
+        }
+      )
     }
   },
   beforeMount() {
     // Store appid and appsecret to sessionStorage
     const authData = this.getAuthDataFromEnv();
     this.saveAuthDataToSession(authData);
-    this.requestAccessToken(authData);
+    this.requestAuthCode(authData);
+    this.setGlobalIntercepter();
+    // console.log(this.axios.defaults.headers.common)
   },
   mounted() {
     const vm = this;
     setInterval(function() {
-      vm.requestAccessToken(vm.getAuthDataFromEnv());
+      vm.requestAuthCode(vm.getAuthDataFromEnv());
       vm.setRequestHeaders();
     }, process.env.VUE_APP_AUTO_REFRESH_SECONDS);
   },

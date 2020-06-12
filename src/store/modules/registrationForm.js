@@ -1,4 +1,5 @@
 const state = () => ({
+  name: '',
   email: '',
   phone: '',
   smsValCode: '',
@@ -39,6 +40,9 @@ const getters = {
 
 // mutations
 const mutations = {
+  setName(state, value) {
+    state.name = value
+  },
   setEmail(state, value) {
     state.email = value
   },
@@ -79,15 +83,17 @@ const mutations = {
 
 // actions
 const actions = {
-  async submitRegistrationForm({ commit, state }) {
+  async submitRegistrationForm({ commit, state, rootState }) {
     try {
       let response = await fetch(`/rosp/api/person/register`, {
         method: 'POST',
         headers: {
           'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=utf-8'
+          'Content-Type': 'application/json;charset=utf-8',
+          'access_token': rootState.auth.accessToken
         },
         body: JSON.stringify({
+          personName: state.name,
           email: state.email,
           mobilePhone: state.phone,
           password: state.password
@@ -110,6 +116,7 @@ const actions = {
       ).then(resp => {
         resp.json().then(function (data) {
           commit('setPhoneValidated', data.verified)
+          console.log("phone validated!")
         })
       })
     } catch (err) {

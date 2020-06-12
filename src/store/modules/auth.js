@@ -1,4 +1,5 @@
 const state = () => ({
+  authCode: '',
   accessToken: '',
   isLoggedIn: false
 })
@@ -8,6 +9,9 @@ const getters = {}
 
 // mutations
 const mutations = {
+  setAuthCode(state, authCode) {
+    state.authCode = authCode
+  },
   setAccessToken(state, token) {
     state.accessToken = token
   },
@@ -19,36 +23,19 @@ const mutations = {
 
 // actions
 const actions = {
-  async sendLoginRequest({ commit, state }, authData) {
+  async sendLoginRequest({ dispatch, commit, state }, authData) {
     try {
-      // let response = await this._vm.axios.post(
-      //   '/rosp/api/person/login',
-      //   {
-      //     params: JSON.stringify({
-      //       mobilePhone: authData.phone,
-      //       password: authData.password
-      //     }),
-      //     headers: {
-      //       "Content-Type": "application/json;charset=utf-8",
-      //       'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTE4NTkyOTQsImFwcElkIjoiMjAyMCIsInNlY3JldEtleSI6IjEyMzQ1NiJ9.G1OmrKGV24zCATsLNjipzqX-FcrL6Vmx4BIci0g2oMU'
-      //     }
-      //   })
-      // console.log(response)
-      // return response
-      let response = await fetch(`/rosp/api/person/login`, {
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=utf-8',
-          'access_token': state.accessToken
-        },
-        body: JSON.stringify({
-          mobilePhone: authData.phone,
-          password: authData.password
-        })
+      let response = await this._vm.axios({
+        method: 'post',
+        url: '/rosp/api/person/login',
+        data: {
+          "mobilePhone": authData.phone,
+          "password": authData.password,
+          "authCode": state.authCode
+        }
       })
-      let result = await response.json()
-      return result
+      console.log(response)
+      return response.data
     } catch (err) {
       console.error(err.message)
       throw err
@@ -64,9 +51,9 @@ const actions = {
       throw err
     }
   },
-  async getAccessToken({ commit, state }, userAuthData) {
+  async getAuthCode({ commit, state }, userAuthData) {
     try {
-      const response = await fetch('/rosp/api/request/getToken', {
+      const response = await fetch('/rosp/api/request/getAuthCode', {
         method: 'POST',
         headers: {
           'Access-Control-Allow-Origin': '*',

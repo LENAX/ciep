@@ -42,6 +42,7 @@ export default {
     signOut() {
       this.$store.commit("auth/setAccessToken", "");
       this.$store.commit("auth/setLoginState", false);
+      this.$store.commit("loginForm/setLoginAttempt", 0)
       this.$store.commit("user/deleteUser");
     }
   }

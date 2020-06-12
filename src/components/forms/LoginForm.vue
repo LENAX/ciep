@@ -47,7 +47,7 @@ export default {
       }
     },
     ...mapState("loginForm", ["loginAttempt", "loginStateMessage", "loading"]),
-    ...mapState("auth", ["isLoggedIn"]),
+    ...mapState("auth", ["isLoggedIn", "accessToken"]),
     ...mapGetters(["validPassword", "validPhone", "loginBtnText"])
   },
   mounted: function() {
@@ -56,10 +56,6 @@ export default {
   methods: {
     async onLoginFormSubmit() {
       try {
-        let test_str = JSON.stringify({
-          phone: this.phone,
-          password: this.password
-        });
         this.$store.commit("loginForm/setLoading", true);
         const userLoginResponse = await this.$store.dispatch(
           "auth/sendLoginRequest",
@@ -68,11 +64,13 @@ export default {
             password: this.password
           }
         );
+        console.log(`userLoginResponse: ${userLoginResponse}`)
         if (
           userLoginResponse.status === "success" &&
           userLoginResponse.data != null
         ) {
           this.$store.commit("auth/setLoginState", true);
+          this.$store.commit("auth/setAccessToken", userLoginResponse.data.token);
           this.$store.commit("loginForm/setLoginAttempt", 0);
           const enUserData = this.CryptoJS.AES.encrypt(
             JSON.stringify(userLoginResponse.data),

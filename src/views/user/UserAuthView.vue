@@ -6,13 +6,12 @@
         <b-row align-v="center">
           <b-col md="8" offset-md="2" lg="6" offset-lg="3" sm="12" align-self="center">
             <b-card class="auth-card bg-light-gray">
-              <!-- <img src="@/assets/img/auth_bg.jpeg" class="img-fluid mb-1" alt="auth background"> -->
               <div class="card-content p-1">
                 <b-tabs content-class="mt-3" justified>
-                  <b-tab class="reg-tab" title="注册" :active="$route.params.authAction === 'register'">
+                  <b-tab class="reg-tab" title="注册" :active="currentActiveTabName === 'register' || $route.params.authAction === 'register'">
                     <RegistrationForm />
                   </b-tab>
-                  <b-tab class="login-tab" title="登录" :active="$route.params.authAction === 'login'">
+                  <b-tab class="login-tab" title="登录" :active="currentActiveTabName === 'login' || $route.params.authAction === 'login'">
                     <LoginForm />
                   </b-tab>
                 </b-tabs>
@@ -29,11 +28,26 @@
 import RegistrationForm from '@/components/forms/RegistrationForm.vue'
 import LoginForm from '@/components/forms/LoginForm.vue'
 
+import { createNamespacedHelpers } from "vuex";
+
+const { mapState, mapMutations } = createNamespacedHelpers(
+  "authView"
+);
+
 export default {
   name: 'UserAuthView',
   components: {
     RegistrationForm,
     LoginForm
+  },
+  computed: {
+    ...mapState(["currentActiveTabName"])
+  },
+  methods: {
+    ...mapMutations(["setActiveTab"])
+  },
+  mounted () {
+    this.$store.commit("authView/setActiveTab", this.$route.params.authAction)
   },
   data () {
     return {
