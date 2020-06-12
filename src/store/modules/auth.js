@@ -53,15 +53,20 @@ const actions = {
   },
   async getAuthCode({ commit, state }, userAuthData) {
     try {
-      const response = await fetch('/rosp/api/request/getAuthCode', {
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(userAuthData)
+      const response = await this._vm.axios({
+        method: 'post',
+        url: '/rosp/api/request/getAuthCode',
+        data: userAuthData
       })
-      const result = await response.json()
+      // const response = await fetch('/rosp/api/request/getAuthCode', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*',
+      //     'Content-Type': 'application/json;charset=utf-8'
+      //   },
+      //   body: JSON.stringify(userAuthData)
+      // })
+      const result = response.data
       return result
     } catch (err) {
       console.error(err.message)
