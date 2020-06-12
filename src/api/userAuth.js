@@ -132,7 +132,7 @@ export default {
           return usr.personId === userId
         })
         if (requestedUser.length === 1) {
-          return JSON.jsonify({
+          return JSON.stringify({
             data: requestedUser,
             message: 'ok',
             redirect: '',
@@ -145,7 +145,7 @@ export default {
         throw Error('Invalid token')
       }
     } catch (e) {
-      return JSON.jsonify({
+      return JSON.stringify({
         data: null,
         message: e.message,
         redirect: '',
@@ -169,7 +169,7 @@ export default {
               return token
             }
           )
-          return JSON.jsonify({
+          return JSON.stringify({
             accessToken: jwtToken,
             status: 'success',
             message: 'Successfully obtained access token!'
@@ -178,7 +178,7 @@ export default {
       })
       return response
     } catch (e) {
-      return JSON.jsonify({
+      return JSON.stringify({
         accessToken: '',
         status: 'failed',
         message: 'invalid username or password'
