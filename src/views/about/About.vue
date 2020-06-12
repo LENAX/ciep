@@ -3,7 +3,7 @@
     <section style="padding: 0px;">
       <img class="img-fluid" src="@/assets/img/ciep_banner2.jpg" />
     </section>
-    <div class="shadow-sm article-clean" style="background-color: rgb(255,255,255);">
+    <div class="shadow-sm article-clean">
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2 text-justify">
@@ -45,11 +45,6 @@ export default {
 <style lang="sass" scoped>
 $break-small: 320px
 $break-large: 1200px
-
-#about-section
-  -webkit-box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75)
-  -moz-box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75)
-  box-shadow: 0px -4px 5px 0px rgba(0,0,0,0.75)
 
 p
   font-family: 'Helvetica Neue'
